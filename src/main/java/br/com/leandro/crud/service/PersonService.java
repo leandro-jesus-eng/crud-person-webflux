@@ -61,7 +61,6 @@ public class PersonService {
 		return Mono.just(id)
 				.flatMap(personRepository::findById)
 				.doOnNext(person -> {
-					//var person = (Person)person1;
 					if (Objects.nonNull(person)) {
 						person.setFirstName(newPerson.getFirstName());
 						person.setLastName(newPerson.getLastName());

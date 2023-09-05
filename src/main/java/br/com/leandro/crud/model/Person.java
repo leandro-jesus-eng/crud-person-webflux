@@ -3,6 +3,7 @@ package br.com.leandro.crud.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -10,9 +11,9 @@ import java.util.*;
 
 @Entity
 @Data
-//@EqualsAndHashCode (callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 @Builder
-public class Person { // extends AbstractEntity {
+public class Person extends AbstractEntity {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,12 +35,12 @@ public class Person { // extends AbstractEntity {
 	@JoinColumn (name = "person_id")
 	@ToString.Exclude
 	@JsonManagedReference
-	private List<PersonImage> personImages = new ArrayList<>();
+	private List<PersonImage> personImages;
 
 	@OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn (name = "person_id")
 	@ToString.Exclude // Não gera toString() para entrar em loop com a outra clasee q também tem referência para cá.
 	@JsonManagedReference // para evitar loop no momento q vai serializar o objeto
-	private Set<PersonAddress> personAddresses = new HashSet<>();
+	private Set<PersonAddress> personAddresses;
 
 }

@@ -2,19 +2,15 @@ package br.com.leandro.crud.repository;
 
 import br.com.leandro.crud.model.Person;
 import org.reactivestreams.Publisher;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
-import java.util.function.Function;
 
 @Component
-public class PersonRepositoryCrud implements PersonRepository<Person, Long> {
+public class PersonRepositoryCrud implements PersonRepository {
 
     private Set<Person> database;
     private Long identity;
@@ -63,11 +59,6 @@ public class PersonRepositoryCrud implements PersonRepository<Person, Long> {
     }
 
     @Override
-    public Mono<Long> count() {
-        return null;
-    }
-
-    @Override
     public Mono<Void> delete(Person entity) {
         database.remove(entity);
         return Mono.empty();
@@ -77,6 +68,11 @@ public class PersonRepositoryCrud implements PersonRepository<Person, Long> {
     public Mono<Void> deleteById(Long aLong) {
         database.remove(Person.builder().id(aLong).build());
         return Mono.empty();
+    }
+
+    @Override
+    public Mono<Long> count() {
+        return null;
     }
 
     @Override
