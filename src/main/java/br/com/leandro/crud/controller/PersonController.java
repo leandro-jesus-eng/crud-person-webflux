@@ -53,7 +53,7 @@ public class PersonController {
 
     @Operation(summary = "Delete a person by Id")
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
-        personService.deleteById(id);
+    public Mono<Person> delete(@PathVariable Long id) {
+        return personService.deleteById(id);
     }
 }

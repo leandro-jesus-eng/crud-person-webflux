@@ -1,17 +1,16 @@
 package br.com.leandro.crud.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@Data
-@EqualsAndHashCode(callSuper = true)
+
+@Getter
+@Setter
+@ToString
 @Builder
 public class Person extends AbstractEntity {
 	
